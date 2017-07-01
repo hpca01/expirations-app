@@ -1,0 +1,59 @@
+{% extends 'expirations/index.html' %}
+
+{% block content %}
+<div class="container">
+      <h1>{{ drug.name }}</h1>
+      <a class="btn btn-primary" href="{% url 'drug_delete' pk=drug.pk %}">DELETE DRUG</a>
+      <h2>Expirations</h2>
+      <a class = "btn btn-success" href="{% url 'add_expiration' pk=drug.pk %}">Add An Expiration</a>
+      <p>
+      <div class="container-fluid-left">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="panel panel-success">
+              <div class = 'panel-heading'>
+                <h4>RWC</h4>
+             </div>
+             <div class="panel-footer">
+               {% for x in exp %}
+               {% if x.facility == 'RWC'%}
+                    {{x.qty}} unit(s) expiring {{x.expirationDate}}<a href = "{% url 'expiration_delete' pk=x.pk %}"><span class = "glyphicon glyphicon-remove"></span></a><br>
+               {% endif %}
+               {% endfor %}
+             </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-primary">
+              <div class = 'panel-heading'>
+               <h4>SC</h4>
+             </div>
+             <div class="panel-footer">
+               {% for x in exp %}
+               {% if x.facility == 'SC'%}
+                    {{x.qty}} unit(s) expiring {{x.expirationDate}} <a href = "{% url 'expiration_delete' pk=x.pk %}"><span class = "glyphicon glyphicon-remove" ></span></a><br>
+               {% endif %}
+               {% endfor %}
+             </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-info">
+              <div class = 'panel-heading'>
+               <h4>SLN</h4>
+             </div>
+             <div class="panel-footer">
+               {% for x in exp %}
+               {% if x.facility == 'SLN'%}
+                    {{x.qty}} unit(s) expiring {{x.expirationDate}} <a href = "{% url 'expiration_delete' pk=x.pk %}"><span class = "glyphicon glyphicon-remove"></span></a><br>
+               {% endif %}
+               {% endfor %}
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+{% endblock %}

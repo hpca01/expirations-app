@@ -1,0 +1,9 @@
+{% extends "expirations/index.html" %}
+{% block content %}
+<div class='container'>
+  <form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete: <h2><span class="label label-warning">{{ object }}</span></h2></p><br><br>
+    <input class='btn btn-danger' type="submit" value="Confirm" />
+  </form>
+</div>
+{% endblock %}

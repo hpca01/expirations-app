@@ -20,9 +20,12 @@ from . import views as exp_view
 urlpatterns = [
     # url(r'^$', exp_view.home, name = 'home'),
     url(r'^$', exp_view.DrugListView.as_view() , name = 'drug_list'),
+    url(r'^list/$', exp_view.DrugExpListView.as_view() , name = 'drug_exp_list'),
     url(r'^drug/new/$',exp_view.CreateDrugView.as_view(), name = 'drug_new'),
     url(r'^drug/(?P<pk>\d+)$', exp_view.DrugDetailView.as_view(), name = 'drug_detail'),
     url(r'^drug/(?P<pk>\d+)/delete$', exp_view.DrugDeleteView.as_view(), name = 'drug_delete'),
     url(r'^drug/(?P<pk>\d+)/expiration$', exp_view.CreateExpirationView.as_view(), name = 'add_expiration'),
     url(r'^drug/(?P<pk>\d+)/expiration/delete$', exp_view.ExpirationDeleteView.as_view(), name = 'expiration_delete'),
+    url(r'^drug/(?P<pk>\d+)/barcode/new/$', exp_view.CreateBarcodeView.as_view(), name = 'add_barcode'),
+
 ]

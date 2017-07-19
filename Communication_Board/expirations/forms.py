@@ -1,6 +1,5 @@
 from django import forms
-
-from .models import Drug, Expiration
+from .models import Drug, Expiration, Barcode
 
 class DrugForm(forms.ModelForm):
 
@@ -15,7 +14,7 @@ class ExpirationForm(forms.ModelForm):
         model = Expiration
         fields = ('qty', 'facility','expirationDate',)
 
-# class BarcodeForm(forms.ModelForm):
-#     class Meta:
-#         model = Barcode
-#         fields = ('barCode',)
+class BarcodeForm(forms.ModelForm):
+    class Meta:
+        model = Barcode
+        fields = ('barCode',)

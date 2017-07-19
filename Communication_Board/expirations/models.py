@@ -12,8 +12,8 @@ class Drug(models.Model):
     #drug_barcode = models.ForeignKey('expirations.Barcode', related_nam='barcodes')
     name = models.CharField(max_length= 200)
 
-    def get_absolute_url(self):
-        return reverse('drug_list')
+    # def get_absolute_url(self):
+    #     return reverse('drug_list')
 
     def __unicode__(self):
         return self.name
@@ -48,9 +48,9 @@ class Expiration(models.Model):
     def return_facility(self):
         return str(self.facility)
 
-# class Barcode(models.Model):
-#     drug = models.ForeignKey('expirations.Drug', related_name = 'barcode_for_drug')
-#     barCode = models.CharField(max_length= 30)
-#
-#     def __unicode__(self):
-#         return str(self.barCode)
+class Barcode(models.Model):
+    drug = models.ForeignKey('expirations.Drug', related_name = 'barcode_for_drug')
+    barCode = models.CharField(max_length= 40)
+
+    def __unicode__(self):
+        return str(self.barCode)

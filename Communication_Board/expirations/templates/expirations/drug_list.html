@@ -1,16 +1,18 @@
 {% extends 'expirations/index.html' %}
 
 {% block content %}
-<div class="container">
-
     {% for drug in drugs %}
+    <div class = '.col-sm-12'>
         <ul class = 'list-group'>
             <li class = "list-group-item" >
-              <span class = "badge">Earliest Date on: {{ drug.early_exp|date:"l d M Y" }}</span>
+              <span class = "badge">First Expiration: {{ drug.early_exp|date:"l M d Y" }}</span>
               <a href="{% url 'drug_detail' pk=drug.pk %}">{{ drug.name }}</a>
-              <span class="label label-info">{{ drug.expiration_dates.facility }}</span>
+              {% regroup drug.expiration_dates.all by facility as facility_list %}
+              {% for x in facility_list %}
+              <span class="label label-info">{{ x.grouper }}</span>
+              {% endfor %}
             </li>
         </ul>
+    </div>
     {% endfor %}
-</div>
 {% endblock %}

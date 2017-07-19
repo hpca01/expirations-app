@@ -1,12 +1,25 @@
-{% extends "expirations/index.html" %}
-{% block content %}
-<div class = "container">
-    <h1>Add Expiration</h1>
+{% extends 'expirations/index.html' %}
 
-    <form method="POST" class="post-form">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-</div>
+{% block content %}
+<h1>Add Expiration for:</h1>
+<h4>{{drug_name.name}}</h4>
+<form method="POST" class="post-form">
+{% csrf_token %}
+{{form.as_p}}
+<button id = "submit_exp" type="submit" class="btn btn-primary">Save</button>
+</form>
+{% endblock %}
+{% block javascript %}
+<script>
+  $('#id_expirationDate').datepicker({
+        changeMonth: true,
+        changeYear: true,
+        startView: 2,
+        autoclose: true,
+        maxDate: "+5y",
+        minDate: "-1y",
+  });
+
+
+</script>
 {% endblock %}

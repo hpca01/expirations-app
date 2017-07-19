@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Blog Project</title>
+        <title>Expirations Tracker</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -10,10 +10,22 @@
 
         {# Fonts#}
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+        <!---DatePicker-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body {
+                padding-top: 70px;
+            }
+            @media (max-width: 980px) {
+                body {
+                    padding-top: 70px;
+                }
+            }
+        </style>
     </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -28,21 +40,23 @@
        <ul class="nav navbar-nav">
          <li class="nav-item"><a href="{% url 'drug_list' %}"><span class ="glyphicon glyphicon-home"></span> Home</a></li>
          <li class="nav-item"><a href="{% url 'drug_new' %}"><span class = "glyphicon glyphicon-plus"></span> Add Drugs</a></li>
-         <li class="nav-item"><a href="#"><span class = "glyphicon glyphicon-calendar"></span> List By Expirations</a></li>
+         <li class="nav-item"><a href="{% url 'drug_exp_list'%}"><span class = "glyphicon glyphicon-calendar"></span> List By Expirations</a></li>
          <li class="nav-item"><a href="#"><span class = "glyphicon glyphicon-map-marker"></span> Facilities Serviced</a></li>
        </ul>
     </div>
   </div>
   </nav>
-  <!-- Latest compiled and minified JavaScript -->
-
-
+    <div class='container-fluid'>
     {% block content %}
     {% endblock %}
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    {% block javascript %} {% endblock %}
 </body>
 </html>

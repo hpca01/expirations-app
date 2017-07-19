@@ -1,11 +1,11 @@
 {% extends 'expirations/index.html' %}
 
 {% block content %}
-<div class="container">
       <h1>{{ drug.name }}</h1>
-      <a class="btn btn-primary" href="{% url 'drug_delete' pk=drug.pk %}">DELETE DRUG</a>
+      <a class="btn btn-primary" href="{% url 'drug_delete' pk=drug.pk %}"><span class ="glyphicon glyphicon-remove" style="font-size: 15px"></span> DELETE Drug</a>
+      <a class="btn btn-info" href="{% url 'add_barcode' pk=drug.pk %}"><span class ="glyphicon glyphicon-barcode" style="font-size: 15px"></span> Add A Barcode</a>
       <h2>Expirations</h2>
-      <a class = "btn btn-success" href="{% url 'add_expiration' pk=drug.pk %}">Add An Expiration</a>
+      <a class = "btn btn-success" href="{% url 'add_expiration' pk=drug.pk %}"><span class ="glyphicon glyphicon-calendar" style="font-size: 15px"></span> Add An Expiration</a>
       <p>
       <div class="container-fluid-left">
         <div class="row">
@@ -17,7 +17,7 @@
              <div class="panel-footer">
                {% for x in exp %}
                {% if x.facility == 'RWC'%}
-                    {{x.qty}} unit(s) expiring {{x.expirationDate}}<a href = "{% url 'expiration_delete' pk=x.pk %}"><span class = "glyphicon glyphicon-remove"></span></a><br>
+                    {{x.qty}} unit(s) expiring {{x.expirationDate}} <a href = "{% url 'expiration_delete' pk=x.pk %}"><span class = "glyphicon glyphicon-remove"></span></a><br>
                {% endif %}
                {% endfor %}
              </div>
@@ -53,7 +53,6 @@
           </div>
         </div>
       </div>
-</div>
 
 
 {% endblock %}

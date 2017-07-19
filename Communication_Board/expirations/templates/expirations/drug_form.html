@@ -2,12 +2,37 @@
 
 {% block content %}
 <div class = "container">
-    <h1>New Drug</h1>
+    <h1>Add A Drug</h1>
 
-    <form method="POST" class="post-form">
+    <form id="drug_form_id" method="POST" class="post-form">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button id = "submit_drug" type="submit" class="btn btn-primary">Save</button>
     </form>
+    <br>
+    <div class="panel panel-success">
+      <div class="panel-heading">Successfully Added</div>
+      <div class="panel-body" id = "success">
+      </div>
 </div>
+{% endblock %}
+{% block javascript %}
+<script>
+$(document).ready(function(){
+  var frm = $("#drug_form_id")
+    frm.submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type:"POST",
+        url: "{% url 'drug_new' %}",
+        data: $(this).serialize(),
+        success: function(data){
+          $('#success').append(data.name+ " has been added to the DRUG LIST<br>");
+          $("#drug_form_id").closest('form').find("input[type=text]").val("");
+        }
+      })
+    });
+})
+</script>
+
 {% endblock %}

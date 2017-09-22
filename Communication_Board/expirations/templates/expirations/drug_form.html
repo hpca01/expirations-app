@@ -10,10 +10,15 @@
     <button id = "submit_drug" type="submit" class="btn btn-primary">Save</button>
     </form>
     <br>
-    <div class="panel panel-success">
-      <div class="panel-heading">Successfully Added</div>
-      <div class="panel-body" id = "success">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-success">
+          <div class="panel-heading">Successfully Added</div>
+          <div class="panel-body" id = "success">
+          </div>
+        </div>
       </div>
+    </div>
 </div>
 {% endblock %}
 {% block javascript %}
@@ -27,12 +32,12 @@ $(document).ready(function(){
         url: "{% url 'drug_new' %}",
         data: $(this).serialize(),
         success: function(data){
-          $('#success').append(data.name+ " has been added to the DRUG LIST<br>");
+          console.log(data.message)
+          $('#success').append( $("#id_name").val() + " has been added to the Drug List<br>");
           $("#drug_form_id").closest('form').find("input[type=text]").val("");
         }
       })
     });
 })
 </script>
-
 {% endblock %}

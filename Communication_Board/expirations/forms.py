@@ -14,6 +14,7 @@ class ExpirationForm(forms.ModelForm):
         model = Expiration
         fields = ('qty', 'facility','expirationDate',)
 
+
 class BarcodeForm(forms.ModelForm):
     class Meta:
         model = Barcode

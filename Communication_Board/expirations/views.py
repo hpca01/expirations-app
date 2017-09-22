@@ -39,13 +39,13 @@ class AjaxableResponseMixin(object):
     def form_valid(self, form):
         response = super(AjaxableResponseMixin, self).form_valid(form)
         if self.request.is_ajax():
-            object_rtn = Drug.objects.get(pk = self.object.pk)
             data = {
-                'name': self.object.name,
-                }
+            'message': "Successfully added data"
+            }
             return JsonResponse(data)
         else:
             return response
+
     def form_invalid(self, form):
         response = super(AjaxableResponseMixin, self).form_invalid(form)
         if self.request.is_ajax():
@@ -58,6 +58,22 @@ class CreateDrugView(AjaxableResponseMixin, CreateView):
     form_class = DrugForm
 
     model = Drug
+
+    def form_invalid(self, form):
+        response = super(CreateDrugView, self).form_invalid(form)
+        if self.request.is_ajax():
+            return JsonResponse(form.errors, status = 400)
+        else:
+            return response
+
+    def form_valid(self, form):
+        response = super(CreateDrugView, self).form_valid(form)
+        if self.request.is_ajax():
+            print(form.cleaned_data)
+            data = {"message": "Success"}
+            return JsonResponse(data)
+        else:
+            return response
 
     def get_success_url(self):
         return reverse_lazy('drug_new')
@@ -76,21 +92,30 @@ class DrugDeleteView(DeleteView):
     model = Drug
     success_url = reverse_lazy('drug_list')
 
-class CreateExpirationView(CreateView):
+class CreateExpirationView(AjaxableResponseMixin, CreateView):
     model = Expiration
     template_name = 'expirations/add_exp.html'
     form_class = ExpirationForm
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
+        #response = super(CreateExpirationView, self).form_valid(form)
+        pk = self.kwargs['pk']
         exp = Expiration()
         exp.expirationDate = form.cleaned_data['expirationDate']
         exp.qty = form.cleaned_data['qty']
         exp.facility = form.cleaned_data['facility']
         #exp.comments = self.request.POST['comments']
-        exp.drug_Linked = Drug.objects.get(pk = self.kwargs['pk'])
+        exp.drug_Linked = Drug.objects.get(pk = pk)
         exp.save()
-        return redirect('drug_detail', pk=self.kwargs['pk'])
+        data = {"message": "Success"}
+        return JsonResponse(data)
+
+    def form_invalid(self, form):
+        response = super(CreateExpirationView, self).form_invalid(form)
+        if form.is_ajax():
+            return JsonResponse(form.errors, status = 400)
+        else:
+            return response
 
     def get_context_data(self):
         drug_pk = self.kwargs['pk']
